@@ -1,4 +1,5 @@
 <?php
+
 namespace PhpRbac;
 
 use \Jf;
@@ -13,10 +14,22 @@ use \Jf;
  */
 class Rbac
 {
-    public function __construct($unit_test = '')
+    public function __construct($unit_test = '', array $databaseConfig = array())
     {
         if ((string) $unit_test === 'unit_test') {
             require_once dirname(dirname(__DIR__)) . '/tests/database/database.config';
+        } elseif (!empty($databaseConfig)) {
+            $databaseConfig = $databaseConfig + array(
+                'host' => 'localhost',
+                'user' => 'root',
+                'pass' => '',
+                'dbname' => dirname(dirname(__DIR__)) . "/phprbac.sqlite3",
+                'adapter' => 'pdo_sqlite', // 'pdo_sqlite', 'pdo_mysql', 'mysqli'
+                'tablePrefix' => 'phprbac_'
+            );
+
+            extract($databaseConfig);
+            unset($databaseConfig);
         } else {
             require_once dirname(dirname(__DIR__)) . '/database/database.config';
         }
