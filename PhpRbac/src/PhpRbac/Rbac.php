@@ -14,6 +14,10 @@ use \Jf;
  */
 class Rbac
 {
+    public $Permissions;
+    public $Roles;
+    public $Users;
+
     public function __construct($unit_test = '', array $databaseConfig = array())
     {
         if ((string) $unit_test === 'unit_test') {

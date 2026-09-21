@@ -87,7 +87,7 @@ abstract class BaseRbac extends JModel
 	 *
 	 * @return integer Number of nodes created (0 if none created)
 	 */
-	function addPath($Path, array $Descriptions = null)
+	function addPath($Path, ?array $Descriptions = null)
 	{
 	    if ($Path[0] !== "/")
 	        throw new \Exception ("The path supplied is not valid.");
@@ -807,7 +807,6 @@ class RoleManager extends BaseRbac
 
 	function __construct()
 	{
-		$this->type = "roles";
 		$this->roles = new FullNestedSet ( $this->tablePrefix () . "roles", "ID", "Lft", "Rght" );
 	}
 
